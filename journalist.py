@@ -41,7 +41,6 @@ def main():
 	if not os.path.exists(curdir):
 		os.makedirs(curdir)
 
-
 	subprocess.call([config['Global']['Editor'], os.path.join(curdir, filename)])
 
 
