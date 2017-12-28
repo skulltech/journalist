@@ -7,10 +7,6 @@ import subprocess
 
 
 
-def create_directory(directory):
-	if not os.path.exists(directory):
-		os.makedirs(directory)
-
 def response(question):
 	answer = input('[?] {}: [y/n] '.format(question))
 	if not answer or answer[0].lower() != 'y':
@@ -18,28 +14,37 @@ def response(question):
 	return True
 
 
-with open('config.yaml') as f:
-	config = yaml.safe_load(f)
+def main():
+	with open('config.yaml') as f:
+		config = yaml.load(f)
 
-home = os.path.expanduser('~')
-datadir = os.path.join(home, '.journalist')
+	home = os.path.expanduser('~')
+	datadir = os.path.join(home, '.journalist')
 
-parser = argparse.ArgumentParser()
-parser.add_argument('name', help='The name of the journal', type=str)
-args = parser.parse_args()
-name = args.name
+	parser = argparse.ArgumentParser()
+	parser.add_argument('name', help='The name of the journal', type=str)
+	args = parser.parse_args()
+	name = args.name
 
-journal_path = os.path.join(datadir, name)
-if not os.path.exists(journal_path):
-	print('[!] The journal {} does not exist!'.format(name))
-	res	= response('Do you want to create journal {}'.format(name))
-	if res:
-		os.makedirs(journal_path)
-	else:
-		sys.exit()
+	journal_path = os.path.join(datadir, name)
+	if not os.path.exists(journal_path):
+		print('[!] The journal {} does not exist!'.format(name))
+		res	= response('Do you want to create journal {}'.format(name))
+		if res:
+			os.makedirs(journal_path)
+		else:
+			sys.exit()
 
-date = datetime.now()
-filename = date.strftime('%Y-%m-%d-%a') + '.md'
-curdir = os.path.join(datadir, name, date.strftime('%Y'), date.strftime('%m'))
-create_directory(curdir)
-subprocess.call(['nano', os.path.join(curdir, filename)])
+	date = datetime.now()
+	filename = date.strftime('%Y-%m-%d-%a') + '.md'
+	curdir = os.path.join(datadir, name, date.strftime('%Y'), date.strftime('%m'))
+	if not os.path.exists(curdir):
+		os.makedirs(curdir)
+
+
+	subprocess.call([config['Global']['Editor'], os.path.join(curdir, filename)])
+
+
+
+if __name__='__main__':
+	main()
