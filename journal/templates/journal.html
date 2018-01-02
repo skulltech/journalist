@@ -1,8 +1,24 @@
 <head>
+    <title>{{ name }}: Journalist</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="github-markdown.css">
+    <link rel="stylesheet" href="static/frameworks.css">
+    <link rel="stylesheet" href="static/site.css">
+    <link rel="stylesheet" href="static/github.css">
     <style>
+    /* Page tweaks */
+    .preview-page {
+      margin-top: 64px;
+    }
+    /* User-content tweaks */
+    .timeline-comment-wrapper > .timeline-comment:after,
+    .timeline-comment-wrapper > .timeline-comment:before {
+      content: none;
+    }
+    /* User-content overrides */
+    .discussion-timeline.wide {
+      width: 920px;
+    }
     .markdown-body {
         box-sizing: border-box;
         min-width: 200px;
@@ -10,7 +26,6 @@
         margin: 0 auto;
         padding: 45px;
     }
-
     @media (max-width: 767px) {
         .markdown-body {
             padding: 15px;
@@ -20,7 +35,23 @@
 </head>
 
 <body>
-<article class="markdown-body">
-    {{ article|safe }}
-</article>
+<div class="page">
+    <div id="preview-page" class="preview-page">
+        <div role="main" class="main-content">
+            <div class="container new-discussion-timeline experiment-repo-nav">
+                <div class="repository-content">
+                    {% for entry in entries %}
+                    <div id="{{ entry['shortdate'] }}" class="readme boxed-group clearfix announce instapaper_body md">
+                        <h3>
+                            <span class="octicon octicon-book"></span>
+                            {{ entry['date'] }}
+                        </h3>
+                        <article class="markdown-body entry-content" itemprop="text">{{ entry['content']|safe }}</article>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>

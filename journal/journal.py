@@ -20,9 +20,9 @@ def get_entries(name):
         dt = datetime.strptime(filename, '%Y-%m-%d-%a.md')
         with open(file) as f:
             contents = f.read()
-        entries.append((dt, contents))
+        entries.append({'datetime': dt, 'date': dt.strftime('%A. %b %d, %Y'), 'shortdate': dt.strftime('%Y-%m-%d'), 'content': githubify(contents)})
 
-    entries.sort(key=lambda x: x[0])
+    entries.sort(key=lambda x: x['datetime'])
     return entries
 
 
@@ -35,9 +35,4 @@ def githubify(text):
 def view_journal():
     name = request.args.get('name')
     entries = get_entries(name)
-
-    text = ''
-    for entry in entries:
-        text = text + entry[1] + '<br><br>'
-    text = '__Sounds__ good? I _think_ [so](https://www.google.com).'
-    return render_template('journal.html', article=githubify(text))
+    return render_template('journal.html', name=name, entries=entries)
