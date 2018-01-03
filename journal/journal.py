@@ -8,6 +8,7 @@ import requests
 
 app = Flask(__name__)
 
+
 def get_entries(name):
     home = os.path.expanduser('~')
     journaldir = os.path.join(home, '.journalist', name)
@@ -36,7 +37,3 @@ def view_journal():
     name = request.args.get('name')
     entries = get_entries(name)
     return render_template('journal.html', name=name, entries=entries)
-
-
-def run_app():
-    app.run()
