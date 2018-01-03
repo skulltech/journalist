@@ -3,6 +3,8 @@ journalist
 
 App to write journal digitally.
 
+|PyPI version|
+
 Features
 --------
 
@@ -59,3 +61,6 @@ Viewing the *"Personal"* journal
 
 Opening the URL http://127.0.0.1:5000/journalist?name=personal in the
 browser would show us the journal entries rendered in HTML.
+
+.. |PyPI version| image:: https://badge.fury.io/py/journalist.svg
+   :target: https://badge.fury.io/py/journalist

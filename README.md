@@ -1,7 +1,7 @@
 # journalist
 App to write journal digitally. 
 
-[![PyPI version](https://badge.fury.io/py/pearsend.svg)](https://badge.fury.io/py/pearsend)
+[![PyPI version](https://badge.fury.io/py/journalist.svg)](https://badge.fury.io/py/journalist)
 
 ## Features
 
