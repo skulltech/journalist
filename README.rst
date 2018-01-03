@@ -40,16 +40,65 @@ Usage
 Usage Examples
 --------------
 
-Writing in a journal named *"Personal"*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Writing journal
+~~~~~~~~~~~~~~~
+
+Journals are stored in the directory ``~/.journalist`` in the following
+structure.
+
+.. code:: console
+
+    .journalist
+    └── journalname
+         └── YYYY
+            └── MM
+                └── YYYY-MM-DD-Day.md
+
+For example, an example ``~/.Journalist`` directory may contain
+
+.. code:: console
+
+    sumit@HAL9000:pts/0->/home/sumit (0) 
+    > tree .journalist 
+    .journalist
+    ├── personal
+    │   ├── 2017
+    │   │   └── 12
+    │   │       └── 2017-12-28-Thu.md
+    │   └── 2018
+    │       └── 01
+    └── technical
+        ├── 2017
+        │   └── 12
+        │       ├── 2017-12-28-Thu.md
+        │       └── 2017-12-29-Fri.md
+        └── 2018
+            └── 01
+                └── 2018-01-03-Wed.md
+
+    10 directories, 4 files
+
+To write in a the journal *personal*, type in the following...
 
 .. code:: console
 
     sumit at HAL9000 in ~
     $ python3 journalist.py write personal
 
-Viewing the *"Personal"* journal
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-  If any journal named *personal* already exists, it will open up the
+   relevant ``.md`` file corresponding to the system date (creating it
+   if it doesn't exist).
+-  If any journal named *personal* doesn't exist, it will prompt the
+   user if they want to create a new journal. If they agree, it will do
+   so and open the corresponding ``.md`` file as described above.
+
+The *markdown* file will be opened in the editor mentioned in the
+``config.yaml`` file (default is ``nano``). If you change it to
+something else, make sure an file named ``filename.md`` can be opened
+using that editor by typing ``editor filename.md`` in the terminal.
+
+Viewing journal
+~~~~~~~~~~~~~~~
 
 .. code:: console
 
@@ -59,8 +108,9 @@ Viewing the *"Personal"* journal
     [*] View this journal at http://127.0.0.1:5000/journalist?name=personal
      * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 
-Opening the URL http://127.0.0.1:5000/journalist?name=personal in the
-browser would show us the journal entries rendered in HTML.
+Opening the `URL <http://127.0.0.1:5000/journalist?name=personal>`__
+http://127.0.0.1:5000/journalist?name=personal in the browser would show
+us the journal entries rendered in HTML.
 
 .. |PyPI version| image:: https://badge.fury.io/py/journalist.svg
    :target: https://badge.fury.io/py/journalist
