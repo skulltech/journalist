@@ -61,7 +61,7 @@ setup(
     #
     # This field corresponds to the "Home-Page" metadata field:
     # https://packaging.python.org/specifications/core-metadata/#home-page-optional
-    url='https://github.com/SkullTech/journal',  # Optional
+    url='https://github.com/SkullTech/journalist',  # Optional
 
     # This should be your name or the name of the organization which owns the
     # project.
