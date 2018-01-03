@@ -1,6 +1,8 @@
 # journalist
 App to write journal digitally. 
 
+[![PyPI version](https://badge.fury.io/py/pearsend.svg)](https://badge.fury.io/py/pearsend)
+
 ## Features
 
 - Write your journal using _Markdown_ in your favorite text-editor.
