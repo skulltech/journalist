@@ -4,6 +4,7 @@ import argparse
 import os
 import sys
 import subprocess
+from journal import journal
 
 
 
@@ -22,7 +23,9 @@ def main():
     datadir = os.path.join(home, '.journalist')
 
     parser = argparse.ArgumentParser()
+    parser.add_argument('task', help='Task to do', type=str, choices=['write', 'view'])
     parser.add_argument('name', help='The name of the journal', type=str)
+
     args = parser.parse_args()
     name = args.name
 
@@ -35,15 +38,19 @@ def main():
         else:
             sys.exit()
 
-    date = datetime.now()
-    filename = date.strftime('%Y-%m-%d-%a') + '.md'
-    curdir = os.path.join(datadir, name, date.strftime('%Y'), date.strftime('%m'))
-    if not os.path.exists(curdir):
-        os.makedirs(curdir)
+    if args.task=='write':
+        date = datetime.now()
+        filename = date.strftime('%Y-%m-%d-%a') + '.md'
+        curdir = os.path.join(datadir, name, date.strftime('%Y'), date.strftime('%m'))
+        if not os.path.exists(curdir):
+            os.makedirs(curdir)
 
-    filepath = os.path.join(curdir, filename)
-    subprocess.call([config['Global']['Editor'], filepath])
-
+        filepath = os.path.join(curdir, filename)
+        subprocess.call([config['Global']['Editor'], filepath])
+    else:
+        print('[*] Starting Journalist viewer webapp...')
+        print('[*] View this journal at http://127.0.0.1:5000/journalist?name={}'.format(name))
+        journal.app.run()
 
 
 if __name__=='__main__':

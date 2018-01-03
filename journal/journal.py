@@ -36,3 +36,7 @@ def view_journal():
     name = request.args.get('name')
     entries = get_entries(name)
     return render_template('journal.html', name=name, entries=entries)
+
+
+def run_app():
+    app.run()
