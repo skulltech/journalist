@@ -3,7 +3,7 @@ import glob
 from datetime import datetime
 from flask import Flask, request, render_template
 import requests
-
+from . import renderer
 
 
 app = Flask(__name__)
@@ -21,15 +21,15 @@ def get_entries(name):
         dt = datetime.strptime(filename, '%Y-%m-%d-%a.md')
         with open(file) as f:
             contents = f.read()
-        entries.append({'datetime': dt, 'date': dt.strftime('%A. %b %d, %Y'), 'shortdate': dt.strftime('%Y-%m-%d'), 'content': githubify(contents)})
+        entries.append({'datetime': dt, 'date': dt.strftime('%A. %b %d, %Y'), 'shortdate': dt.strftime('%Y-%m-%d'), 'content': renderer.render(contents)})
 
     entries.sort(key=lambda x: x['datetime'])
     return entries
 
 
-def githubify(text):
-    r = requests.post('https://api.github.com/markdown/raw', data=text, headers={'Content-Type': 'text/x-markdown'})
-    return r.text
+# def githubify(text):
+#     r = requests.post('https://api.github.com/markdown/raw', data=text, headers={'Content-Type': 'text/x-markdown'})
+#     return r.text
 
 
 @app.route('/journalist')
