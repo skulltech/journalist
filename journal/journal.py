@@ -27,9 +27,9 @@ def get_entries(name):
     return entries
 
 
-# def githubify(text):
-#     r = requests.post('https://api.github.com/markdown/raw', data=text, headers={'Content-Type': 'text/x-markdown'})
-#     return r.text
+def githubify(text):
+    r = requests.post('https://api.github.com/markdown/raw', data=text, headers={'Content-Type': 'text/x-markdown'})
+    return r.text
 
 
 @app.route('/journalist')
