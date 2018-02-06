@@ -13,13 +13,12 @@ App to write journal digitally.
 
 Install it using `pip`
 ```console
-pip install journalist
+$ pip install journalist
 ```
 
 # Usage 
 
 ```console
-sumit at HAL9000 in ~ 
 $ python3 journalist.py -h
 usage: journalist.py [-h] {write,view} name
 
@@ -38,6 +37,7 @@ optional arguments:
 Journals are stored in the directory `~/.journalist` in the following structure.
 
 ```console
+$ tree .journalist 
 .journalist
 └── journalname
      └── YYYY
@@ -47,8 +47,7 @@ Journals are stored in the directory `~/.journalist` in the following structure.
 
 For example, an example `~/.Journalist` directory may contain
 ```console
-sumit@HAL9000:pts/0->/home/sumit (0) 
-> tree .journalist 
+$ tree .journalist 
 .journalist
 ├── personal
 │   ├── 2017
@@ -70,7 +69,6 @@ sumit@HAL9000:pts/0->/home/sumit (0)
 
 To write in a the journal _personal_, type in the following...
 ```console
-sumit at HAL9000 in ~
 $ python3 journalist.py write personal
 ```
 
@@ -82,7 +80,6 @@ The _markdown_ file will be opened in the editor mentioned in the `config.yaml` 
 ### Viewing journal
 
 ```console
-sumit at HAL9000 in ~ 
 $ python3 journalist.py view personal 
 [*] Starting Journalist viewer webapp...
 [*] View this journal at http://127.0.0.1:5000/journalist?name=personal
